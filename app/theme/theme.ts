@@ -2,6 +2,27 @@
 
 import { createTheme } from '@mui/material/styles';
 
+// Extend MUI Palette to include tertiary color
+declare module '@mui/material/styles' {
+  interface Palette {
+    tertiary: {
+      main: string;
+      light: string;
+      dark: string;
+      contrastText: string;
+    };
+  }
+
+  interface PaletteOptions {
+    tertiary?: {
+      main: string;
+      light: string;
+      dark: string;
+      contrastText: string;
+    };
+  }
+}
+
 // GastroSoftware color palette from Theme.kt
 // Light mode colors
 const lightColors = {
