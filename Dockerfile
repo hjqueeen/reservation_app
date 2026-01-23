@@ -1,44 +1,44 @@
-# Node 24.13.0을 사용하는 베이스 이미지
+# Base image using Node 24.13.0
 FROM node:24.13.0-alpine AS base
 
-# 의존성 설치 단계
+# Dependencies installation stage
 FROM base AS deps
-# 패키지 매니저 캐시를 위한 작업 디렉토리 설정
+# Set working directory for package manager cache
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# package.json 복사
+# Copy package.json
 COPY package.json ./
-# 의존성 설치
+# Install dependencies
 RUN npm install
 
-# 빌드 단계
+# Build stage
 FROM base AS builder
 WORKDIR /app
-# 의존성 복사
+# Copy dependencies
 COPY --from=deps /app/node_modules ./node_modules
-# 소스 코드 복사
+# Copy source code
 COPY . .
 
-# Next.js 빌드 (환경 변수 설정 가능)
+# Next.js build (environment variables can be set)
 ENV NEXT_TELEMETRY_DISABLED 1
 ENV DOCKER=true
 
-# 프로덕션 빌드 실행
+# Run production build
 RUN npm run build
 
-# 프로덕션 실행 단계
+# Production runtime stage
 FROM base AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
 
-# 시스템 사용자 생성 (보안을 위해 root가 아닌 사용자로 실행)
+# Create system user (run as non-root user for security)
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Next.js 빌드 결과물 복사
+# Copy Next.js build artifacts
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
@@ -47,7 +47,7 @@ USER nextjs
 
 EXPOSE 3002
 
-ENV PORT 3002
-ENV HOSTNAME "0.0.0.0"
+ENV PORT=3002
+ENV HOSTNAME="0.0.0.0"
 
 CMD ["node", "server.js"]

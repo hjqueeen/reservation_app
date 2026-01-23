@@ -1,25 +1,25 @@
-# 개발 환경용 Dockerfile
+# Dockerfile for development environment
 FROM node:24.13.0-alpine
 
 WORKDIR /app
 
-# 패키지 매니저 캐시를 위한 설정
+# Configuration for package manager cache
 RUN apk add --no-cache libc6-compat
 
-# package.json 복사
+# Copy package.json
 COPY package.json ./
 
-# 의존성 설치
+# Install dependencies
 RUN npm install
 
-# 소스 코드는 docker-compose에서 볼륨으로 마운트되므로 여기서는 복사하지 않음
+# Source code is mounted as volume in docker-compose, so not copied here
 
 EXPOSE 3002
 
-ENV PORT 3002
-ENV HOSTNAME "0.0.0.0"
+ENV PORT=3002
+ENV HOSTNAME="0.0.0.0"
 
-# Entrypoint 스크립트 생성
+# Create entrypoint script
 RUN echo '#!/bin/sh' > /entrypoint.sh && \
     echo 'if [ ! -d "node_modules" ] || [ -z "$(ls -A node_modules)" ]; then' >> /entrypoint.sh && \
     echo '  echo "Installing dependencies..."' >> /entrypoint.sh && \
@@ -30,5 +30,5 @@ RUN echo '#!/bin/sh' > /entrypoint.sh && \
 
 ENTRYPOINT ["/entrypoint.sh"]
 
-# 개발 서버 실행
+# Run development server
 CMD ["npm", "run", "dev"]

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import ClientWrapper from "./components/ClientWrapper";
+import ClientWrapper from "./_components/ClientWrapper";
 
 export const metadata: Metadata = {
   title: "MUI Components Showcase",

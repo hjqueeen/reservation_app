@@ -7,16 +7,24 @@ const repositoryName =
 
 const isDocker = process.env.DOCKER === "true";
 const isGitHubActions = process.env.GITHUB_ACTIONS === "true";
+const isDevelopment = process.env.NODE_ENV === "development";
 
 // Inside Docker containers we keep basePath empty (root path)
 // Only GitHub Actions + Pages will use a non-empty basePath
-const basePath = !isDocker && isGitHubActions ? `/${repositoryName}` : "";
+// In development, always use empty basePath
+const basePath = isDevelopment 
+  ? "" 
+  : !isDocker && isGitHubActions 
+    ? `/${repositoryName}` 
+    : "";
 
 const nextConfig = {
-  // Use standalone output for Docker, static export for GitHub Pages
-  output: isDocker ? "standalone" : "export",
-  basePath,
-  assetPrefix: basePath,
+  // Use standalone output for Docker production, static export for GitHub Pages
+  // In development mode, output setting is ignored by Next.js
+  ...(isDocker && !isDevelopment ? { output: "standalone" } : {}),
+  ...(!isDocker && !isDevelopment ? { output: "export" } : {}),
+  // Only set basePath if it's not empty
+  ...(basePath ? { basePath, assetPrefix: basePath } : {}),
   images: {
     // GitHub Pages does not support image optimization
     unoptimized: true,
