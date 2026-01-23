@@ -10,6 +10,8 @@ const menuItems = [
   { text: "Home", icon: <Home />, path: "/" },
   { text: "About", icon: <Info />, path: "/about" },
   { text: "Contact", icon: <ContactMail />, path: "/contact" },
+  { text: "Login", icon: <ContactMail />, path: "/login" },
+  { text: "Select Mode", icon: <ContactMail />, path: "/select-mode" },
 ];
 
 export default function Navigation() {

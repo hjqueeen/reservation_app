@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import {
   Box,
   Container,
@@ -49,14 +49,14 @@ import {
   Search,
 } from "@mui/icons-material";
 import { useState } from "react";
-import { useUiStore } from "./store/useUiStore";
+// import { useUiStore } from "./store/useUiStore";
 
 export default function Home() {
   const [tabValue, setTabValue] = useState(0);
   const [sliderValue, setSliderValue] = useState(30);
   const [ratingValue, setRatingValue] = useState(3);
   const [checked, setChecked] = useState(true);
-  const { globalCount, increment, reset } = useUiStore();
+  // const { globalCount, increment, reset } = useUiStore();
 
   return (
     <Box sx={{ minHeight: "100vh", bgcolor: "background.default", py: 4 }}>
@@ -112,7 +112,7 @@ export default function Home() {
         </Paper>
 
         {/* Global State with Zustand */}
-        <Paper elevation={2} sx={{ p: 3, mb: 4 }}>
+        {/* <Paper elevation={2} sx={{ p: 3, mb: 4 }}>
           <Typography variant="h3" gutterBottom>
             Global State (Zustand)
           </Typography>
@@ -128,7 +128,7 @@ export default function Home() {
               Reset
             </Button>
           </Stack>
-        </Paper>
+        </Paper> */}
 
         {/* Cards Section */}
         <Paper elevation={2} sx={{ p: 3, mb: 4 }}>
