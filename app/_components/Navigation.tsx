@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from "@mui/material";
-import { Home, Info, ContactMail, Palette, Login, Settings } from "@mui/icons-material";
+import { Home, Info, ContactMail, Palette, Login, Settings, Widgets } from "@mui/icons-material";
 import { useRouter, usePathname } from "next/navigation";
 
 const drawerWidth = 240;
@@ -9,6 +9,7 @@ const drawerWidth = 240;
 const menuItems = [
   { text: "Home", icon: <Home />, path: "/" },
   { text: "Theme", icon: <Palette />, path: "/theme" },
+  { text: "UI Components", icon: <Widgets />, path: "/ui-components" },
   { text: "Login", icon: <Login />, path: "/login" },
   { text: "Select Mode", icon: <Settings />, path: "/select-mode" },
 ];
