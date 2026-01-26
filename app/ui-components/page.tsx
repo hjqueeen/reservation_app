@@ -40,9 +40,9 @@ export default function UIComponentsPage() {
           Button component for category selection with selected state.
         </Typography>
         <Stack spacing={2} sx={{ maxWidth: 300 }}>
-          {categories.map((category) => (
+          {categories.map((category, index) => (
             <CategoryButton
-              key={category}
+              key={`category-${index}`}
               text={category}
               isSelected={category === selectedCategory}
               onClick={() => setSelectedCategory(category)}
