@@ -37,20 +37,7 @@ const SelectModePage = () => {
         position: "relative",
       }}
     >
-      {/* Top Status Bar - Orange */}
-      <Box
-        sx={{
-          bgcolor: "#FF8C00",
-          width: "100%",
-          height: "48px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          px: 2,
-          color: "#FFFFFF",
-        }}
-      >
-      </Box>
+
 
       {/* Main Content */}
       <Box
@@ -94,27 +81,7 @@ const SelectModePage = () => {
         </Stack>
       </Box>
 
-      {/* Bottom Navigation Bar - Black */}
-      <Box
-        sx={{
-          bgcolor: "#000000",
-          width: "100%",
-          height: "32px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {/* Small white line indicator */}
-        <Box
-          sx={{
-            width: "134px",
-            height: "4px",
-            bgcolor: "#FFFFFF",
-            borderRadius: "2px",
-          }}
-        />
-      </Box>
+
     </Box>
   );
 };
