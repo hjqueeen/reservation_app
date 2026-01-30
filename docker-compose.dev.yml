@@ -7,6 +7,10 @@ services:
       - "3002:3002"
     environment:
       - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+      - WATCHPACK_POLLING_INTERVAL=100
+      - CHOKIDAR_USEPOLLING=true
+
     volumes:
       # Mount source code for hot reloading in development
       - .:/app
