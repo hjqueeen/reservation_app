@@ -15,6 +15,7 @@ import {
   ArrowForward,
 } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
+import RoleSelectionCard from "../_components/ui/RoleSelectionCard";
 
 const SelectModePage = () => {
   const router = useRouter();
@@ -49,27 +50,6 @@ const SelectModePage = () => {
           color: "#FFFFFF",
         }}
       >
-        {/* Left side: Time, Signal, Lock */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          <Typography variant="body2" sx={{ fontWeight: 500 }}>
-            {currentTime}
-          </Typography>
-          <SignalWifi4Bar sx={{ fontSize: 18 }} />
-          <Lock sx={{ fontSize: 18 }} />
-        </Box>
-
-        {/* Center: Small white line */}
-        <Box
-          sx={{
-            width: "40px",
-            height: "4px",
-            bgcolor: "#FFFFFF",
-            borderRadius: "2px",
-          }}
-        />
-
-        {/* Right side: Battery */}
-        <BatteryFull sx={{ fontSize: 24 }} />
       </Box>
 
       {/* Main Content */}
@@ -100,120 +80,17 @@ const SelectModePage = () => {
         {/* Mode Cards */}
         <Stack spacing={3} sx={{ width: "100%", maxWidth: "600px" }}>
           {/* Customer Card */}
-          <Card
-            sx={{
-              bgcolor: "#FFF8F0",
-              borderRadius: 4,
-              boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
-              cursor: "pointer",
-              transition: "transform 0.2s, box-shadow 0.2s",
-              "&:hover": {
-                transform: "translateY(-2px)",
-                boxShadow: "0px 6px 16px rgba(0, 0, 0, 0.15)",
-              },
-            }}
+          <RoleSelectionCard
+            title="Customer"
+            description="Order food and view menu"
             onClick={() => router.push("/customer")}
-          >
-            <CardContent
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                py: 3,
-                px: 4,
-              }}
-            >
-              <Box>
-                <Typography
-                  variant="h5"
-                  sx={{
-                    fontWeight: 600,
-                    color: "#000000",
-                    mb: 0.5,
-                  }}
-                >
-                  Customer
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{
-                    color: "#000000",
-                    opacity: 0.8,
-                  }}
-                >
-                  Order food and view menu
-                </Typography>
-              </Box>
-              <IconButton
-                sx={{
-                  color: "#FF8C00",
-                  "&:hover": {
-                    bgcolor: "rgba(255, 140, 0, 0.1)",
-                  },
-                }}
-              >
-                <ArrowForward sx={{ fontSize: 28 }} />
-              </IconButton>
-            </CardContent>
-          </Card>
-
+          />
           {/* Staff Card */}
-          <Card
-            sx={{
-              bgcolor: "#FFF8F0",
-              borderRadius: 4,
-              boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
-              cursor: "pointer",
-              transition: "transform 0.2s, box-shadow 0.2s",
-              "&:hover": {
-                transform: "translateY(-2px)",
-                boxShadow: "0px 6px 16px rgba(0, 0, 0, 0.15)",
-              },
-            }}
+          <RoleSelectionCard
+            title="Staff"
+            description="Manage orders and kitchen"
             onClick={() => router.push("/staff")}
-          >
-            <CardContent
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                py: 3,
-                px: 4,
-              }}
-            >
-              <Box>
-                <Typography
-                  variant="h5"
-                  sx={{
-                    fontWeight: 600,
-                    color: "#000000",
-                    mb: 0.5,
-                  }}
-                >
-                  Staff
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{
-                    color: "#000000",
-                    opacity: 0.8,
-                  }}
-                >
-                  Manage orders and kitchen
-                </Typography>
-              </Box>
-              <IconButton
-                sx={{
-                  color: "#FF8C00",
-                  "&:hover": {
-                    bgcolor: "rgba(255, 140, 0, 0.1)",
-                  },
-                }}
-              >
-                <ArrowForward sx={{ fontSize: 28 }} />
-              </IconButton>
-            </CardContent>
-          </Card>
+          />
         </Stack>
       </Box>
 

@@ -14,47 +14,63 @@ export default function RoleSelectionCard({
   description,
   onClick,
 }: RoleSelectionCardProps) {
+
   return (
     <Card
-      onClick={onClick}
+    sx={{
+      bgcolor: "#FFF8F0",
+      borderRadius: 4,
+      boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+      cursor: "pointer",
+      transition: "transform 0.2s, box-shadow 0.2s",
+      "&:hover": {
+        transform: "translateY(-2px)",
+        boxShadow: "0px 6px 16px rgba(0, 0, 0, 0.15)",
+      },
+    }}
+    onClick={onClick}
+  >
+    <CardContent
       sx={{
-        height: 120,
-        borderRadius: 2,
-        cursor: 'pointer',
-        boxShadow: 4,
-        transition: 'all 0.2s ease-in-out',
-        '&:hover': {
-          boxShadow: 8,
-          transform: 'translateY(-2px)',
-        },
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        py: 3,
+        px: 4,
       }}
     >
-      <CardContent
-        sx={{
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: 3,
-        }}
-      >
-        <Box sx={{ flex: 1 }}>
-          <Typography variant="h5" component="h3" fontWeight="bold" gutterBottom>
-            {title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {description}
-          </Typography>
-        </Box>
-        <IconButton
+      <Box>
+        <Typography
+          variant="h5"
           sx={{
-            color: 'primary.main',
-            marginLeft: 2,
+            fontWeight: 600,
+            color: "#000000",
+            mb: 0.5,
           }}
         >
-          <ArrowForward />
-        </IconButton>
-      </CardContent>
-    </Card>
+          {title}
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{
+            color: "#000000",
+            opacity: 0.8,
+          }}
+        >
+          {description}
+        </Typography>
+      </Box>
+      <IconButton
+        sx={{
+          color: "#FF8C00",
+          "&:hover": {
+            bgcolor: "rgba(255, 140, 0, 0.1)",
+          },
+        }}
+      >
+        <ArrowForward sx={{ fontSize: 28 }} />
+      </IconButton>
+    </CardContent>
+  </Card>
   );
 }
