@@ -12,6 +12,8 @@ const menuItems = [
   { text: "UI Components", icon: <Widgets />, path: "/ui-components" },
   { text: "Login", icon: <Login />, path: "/login" },
   { text: "Select Mode", icon: <Settings />, path: "/select-mode" },
+  { text: "Menu Screen", icon: <Widgets />, path: "/menu-screen" },
+  { text: "Menu Detail", icon: <Widgets />, path: "/menu-detail" },
 ];
 
 export default function Navigation() {
