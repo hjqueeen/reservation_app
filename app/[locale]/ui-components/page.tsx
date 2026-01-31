@@ -10,10 +10,10 @@ import {
   Stack,
 } from '@mui/material';
 import { useState } from 'react';
-import CategoryButton from '../_components/ui/CategoryButton';
-import RoleSelectionCard from '../_components/ui/RoleSelectionCard';
-import MenuItemCard from '../_components/ui/MenuItemCard';
-import CategorySectionHeader from '../_components/ui/CategorySectionHeader';
+import CategoryButton from '../../_components/ui/CategoryButton';
+import RoleSelectionCard from '../../_components/ui/RoleSelectionCard';
+import MenuItemCard from '../../_components/ui/MenuItemCard';
+import CategorySectionHeader from '../../_components/ui/CategorySectionHeader';
 
 export default function UIComponentsPage() {
   const [selectedCategory, setSelectedCategory] = useState('Appetizers');

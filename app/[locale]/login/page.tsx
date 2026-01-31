@@ -17,18 +17,20 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useRouter } from "next/navigation";
+import { useLocale } from "../../_hooks/useLocale";
 import {
   getApiBaseUrl,
   loginApi,
   saveAccessToken,
   saveCredentials,
-} from "../_utils/api";
+} from "../../_utils/api";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () =>
     setShowPassword((show: boolean) => !show);
   const router = useRouter();
+  const locale = useLocale();
 
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -53,7 +55,7 @@ const LoginPage = () => {
       const response = await loginApi(baseUrl, email.trim(), password);
       saveAccessToken(response.accessToken);
       saveCredentials(email.trim(), password);
-      router.push("/select-mode");
+      router.push(`/${locale}/select-mode`);
     } catch (err) {
       setErrorCode(2);
       setErrorMessage(

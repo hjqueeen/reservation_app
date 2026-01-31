@@ -1,10 +1,12 @@
-import type { Metadata } from "next";
+import type { Viewport } from "next";
 import "./globals.css";
-import ClientWrapper from "./_components/ClientWrapper";
+import LangFromPath from "./_components/LangFromPath";
+import { defaultLocale, getHtmlLang } from "./_config/metadata";
 
-export const metadata: Metadata = {
-  title: "MUI Components Showcase",
-  description: "Material-UI Components and Variants Showcase",
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#FF8C00",
 };
 
 export default function RootLayout({
@@ -13,9 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang={getHtmlLang(defaultLocale)} suppressHydrationWarning>
       <body className="antialiased">
-        <ClientWrapper>{children}</ClientWrapper>
+        <LangFromPath />
+        {children}
       </body>
     </html>
   );

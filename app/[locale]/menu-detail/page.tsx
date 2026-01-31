@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
-import MenuDetailDialog from '../_components/ui/MenuDetailDialog';
+import MenuDetailDialog from '../../_components/ui/MenuDetailDialog';
 
 const MenuDetail = () => {
   const [dialogOpen, setDialogOpen] = useState(false);

@@ -15,10 +15,12 @@ import {
   ArrowForward,
 } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
-import RoleSelectionCard from "../_components/ui/RoleSelectionCard";
+import { useLocale } from "../../_hooks/useLocale";
+import RoleSelectionCard from "../../_components/ui/RoleSelectionCard";
 
 const SelectModePage = () => {
   const router = useRouter();
+  const locale = useLocale();
 
   // Get current time
   const currentTime = new Date().toLocaleTimeString("en-US", {
@@ -70,13 +72,13 @@ const SelectModePage = () => {
           <RoleSelectionCard
             title="Customer"
             description="Order food and view menu"
-            onClick={() => router.push("/customer")}
+            onClick={() => router.push(`/${locale}/customer`)}
           />
           {/* Staff Card */}
           <RoleSelectionCard
             title="Staff"
             description="Manage orders and kitchen"
-            onClick={() => router.push("/staff")}
+            onClick={() => router.push(`/${locale}/staff`)}
           />
         </Stack>
       </Box>

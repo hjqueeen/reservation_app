@@ -17,12 +17,12 @@ import {
   getRestaurantId,
   getAccessToken,
   getAuthHeaders,
-} from "../../_utils/api";
-import type { OrderDto, OrderItemDto } from "../../_types/order";
+} from "../../../_utils/api";
+import type { OrderDto, OrderItemDto } from "../../../_types/order";
 import {
   isKitchenOrder,
   getDisplayOrderNumber,
-} from "../../_types/order";
+} from "../../../_types/order";
 
 const KITCHEN_COLUMN_COUNT = 4;
 
