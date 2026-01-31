@@ -2,7 +2,7 @@ import React from 'react'
 
 const MenuScreen = () => {
   return (
-    <div>MenuScreen</div>
+    <div>MenuScreens</div>
   )
 }
 
