@@ -28,6 +28,10 @@ const nextConfig = {
   images: {
     // GitHub Pages does not support image optimization
     unoptimized: true,
+    remotePatterns: [
+      { protocol: 'https', hostname: 'files.pengueen.de', pathname: '/**' },
+      { protocol: 'https', hostname: 'files.pengueen.de', pathname: '/api/download/**' },
+    ],
   },
   trailingSlash: true,
   env: {
