@@ -149,7 +149,7 @@ const MenuScreen = () => {
           </Box>
         </Toolbar>
       </AppBar>
-      <Grid container rows={1} sx={{ mt: 4 }}>
+      <Box sx={{ display: "flex", mt: 4 }}>
         <Box
           width="18%"
           height="100%"
@@ -229,7 +229,7 @@ const MenuScreen = () => {
             );
           })}
         </Grid>
-      </Grid>
+      </Box>
     </Box>
   );
 };

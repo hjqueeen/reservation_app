@@ -3,7 +3,7 @@
 import { Typography, Box, Divider } from "@mui/material";
 
 interface CategorySectionHeaderProps {
-  id: string;
+  id?: string;
   category: string;
 }
 

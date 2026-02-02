@@ -92,7 +92,6 @@ export default function UIComponentsPage() {
               name="Grilled Salmon"
               description="Fresh Atlantic salmon with lemon butter sauce and seasonal vegetables"
               price={24.99}
-              category="Main Course"
               imageUrl="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400"
               onClick={() => console.log('Grilled Salmon clicked')}
             />
@@ -102,7 +101,6 @@ export default function UIComponentsPage() {
               name="Caesar Salad"
               description="Crisp romaine lettuce with Caesar dressing, croutons, and parmesan"
               price={12.99}
-              category="Appetizer"
               imageUrl="https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400"
               onClick={() => console.log('Caesar Salad clicked')}
             />
@@ -112,7 +110,6 @@ export default function UIComponentsPage() {
               name="Chocolate Cake"
               description="Rich chocolate layer cake with vanilla frosting"
               price={8.99}
-              category="Dessert"
               imageUrl="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400"
               onClick={() => console.log('Chocolate Cake clicked')}
             />
@@ -151,7 +148,6 @@ export default function UIComponentsPage() {
                 name="Sample Item 1"
                 description="This is a sample menu item"
                 price={15.99}
-                category={selectedCategory}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
@@ -159,7 +155,6 @@ export default function UIComponentsPage() {
                 name="Sample Item 2"
                 description="Another sample menu item"
                 price={18.99}
-                category={selectedCategory}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
@@ -167,7 +162,6 @@ export default function UIComponentsPage() {
                 name="Sample Item 3"
                 description="Yet another sample menu item"
                 price={22.99}
-                category={selectedCategory}
               />
             </Grid>
           </Grid>
