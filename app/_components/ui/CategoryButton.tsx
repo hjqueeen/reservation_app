@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Button } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { Button } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 interface CategoryButtonProps {
   text: string;
@@ -21,17 +21,18 @@ export default function CategoryButton({
   return (
     <Button
       onClick={onClick}
-      variant={isSelected ? 'contained' : 'text'}
+      variant={isSelected ? "contained" : "text"}
       fullWidth={fullWidth}
       sx={{
         height: 48,
         borderRadius: 2,
-        textTransform: 'none',
+        textTransform: "none",
         fontWeight: isSelected ? 700 : 400,
-        justifyContent: 'flex-start',
-        textAlign: 'left',
-        boxShadow: isSelected ? theme.shadows[4] : 'none',
-        '&:hover': {
+        justifyContent: "flex-start",
+        textAlign: "left",
+        color: isSelected ? "white" : "black",
+        boxShadow: isSelected ? theme.shadows[4] : "none",
+        "&:hover": {
           backgroundColor: isSelected
             ? theme.palette.primary.dark
             : theme.palette.action.hover,
