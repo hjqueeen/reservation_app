@@ -6,6 +6,7 @@ import MenuItemCard from "../_components/ui/MenuItemCard";
 import CategoryButton from "../_components/ui/CategoryButton";
 import CategorySectionHeader from "../_components/ui/CategorySectionHeader";
 import { useCartStore } from "../_store/useCartStore";
+import { MenuItem } from "../_types/menu";
 
 import {
   Grid,
@@ -23,10 +24,14 @@ const MenuScreen = () => {
     (a, b) => a.displayOrder - b.displayOrder,
   );
   var menuItems = getMockMenuItems("1");
-  var menuItemsByCategory = Object.groupBy(
-    menuItems,
-    (item) => item.categoryId,
-  );
+  var menuItemsByCategory: Record<string, MenuItem[]> = menuItems.reduce((categoryGroups, item) => {
+    const categoryId = item.categoryId;
+    if (!categoryGroups[categoryId]) {
+      categoryGroups[categoryId] = [];
+    }
+    categoryGroups[categoryId].push(item);
+    return categoryGroups;
+  }, {} as Record<string, MenuItem[]>);
 
   const [selectedCategory, setSelectedCategory] = useState(categories[0].id);
   const [selectedLanguage, setSelectedLanguage] = useState("de");
