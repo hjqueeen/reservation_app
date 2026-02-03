@@ -3,6 +3,7 @@
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from "@mui/material";
 import { Home, Info, ContactMail, Palette, Login, Settings, Widgets } from "@mui/icons-material";
 import { useRouter, usePathname } from "next/navigation";
+import { useLocale } from "../_hooks/useLocale";
 
 const drawerWidth = 240;
 
@@ -16,9 +17,15 @@ const menuItems = [
   { text: "Menu Detail", icon: <Widgets />, path: "/menu-detail" },
 ];
 
+function pathWithLocale(locale: string, path: string): string {
+  const base = path === "/" ? "" : path;
+  return `/${locale}${base}`;
+}
+
 export default function Navigation() {
   const router = useRouter();
   const pathname = usePathname();
+  const locale = useLocale();
 
   return (
     <Drawer
@@ -36,17 +43,20 @@ export default function Navigation() {
       <Toolbar />
       <Box sx={{ overflow: "auto" }}>
         <List>
-          {menuItems.map((item) => (
+          {menuItems.map((item) => {
+            const fullPath = pathWithLocale(locale, item.path);
+            return (
             <ListItem key={item.text} disablePadding>
               <ListItemButton
-                selected={pathname === item.path}
-                onClick={() => router.push(item.path)}
+                selected={pathname === fullPath}
+                onClick={() => router.push(fullPath)}
               >
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
               </ListItemButton>
             </ListItem>
-          ))}
+          );
+          })}
         </List>
       </Box>
     </Drawer>

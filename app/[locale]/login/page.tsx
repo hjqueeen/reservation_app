@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { useTheme } from "@mui/material/styles";
 import {
   Box,
   TextField,
@@ -13,32 +12,57 @@ import {
   FormHelperText,
   InputAdornment,
   IconButton,
+  CircularProgress,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useRouter } from "next/navigation";
+import { useLocale } from "../../_hooks/useLocale";
+import {
+  getApiBaseUrl,
+  loginApi,
+  saveAccessToken,
+  saveCredentials,
+} from "../../_utils/api";
 
 const LoginPage = () => {
-  const theme = useTheme();
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () =>
     setShowPassword((show: boolean) => !show);
   const router = useRouter();
+  const locale = useLocale();
 
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
-
+  const [loading, setLoading] = React.useState(false);
   const [errorCode, setErrorCode] = React.useState(0);
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [errorMessage, setErrorMessage] = React.useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if(email === "" || password === "") {
+    if (email === "" || password === "") {
       setErrorCode(1);
-    }else if(email !== "gastrosoftware_test@gmail.com" || password !== "!Test123") {
+      return;
+    }
+
+    setErrorCode(0);
+    setErrorMessage("");
+    setLoading(true);
+
+    try {
+      const baseUrl = getApiBaseUrl();
+      const response = await loginApi(baseUrl, email.trim(), password);
+      saveAccessToken(response.accessToken);
+      saveCredentials(email.trim(), password);
+      router.push(`/${locale}/select-mode`);
+    } catch (err) {
       setErrorCode(2);
-    }else {
-      setErrorCode(0);
-      router.push("/select-mode");  
+      setErrorMessage(
+        err instanceof Error ? err.message : "Email or password is incorrect"
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -68,20 +92,29 @@ const LoginPage = () => {
         Enter email and password
       </Typography>
 
-      <form onSubmit={handleSubmit} style={{ width: "100%"}} onChange={() => setErrorCode(0)}>
+      <form
+        onSubmit={handleSubmit}
+        style={{ width: "100%" }}
+        onChange={() => {
+          setErrorCode(0);
+          setErrorMessage("");
+        }}
+      >
         <TextField
           fullWidth
           label="Email"
           placeholder="Enter Email"
           variant="outlined"
+          value={email}
           sx={{ mb: 2 }}
           error={errorCode === 1 && email === "" || errorCode === 2}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setEmail(e.target.value)
+          }
         />
-        <FormControl 
-          fullWidth 
-          variant="outlined" 
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} 
+        <FormControl
+          fullWidth
+          variant="outlined"
           error={errorCode === 1 && password === "" || errorCode === 2}
         >
           <InputLabel htmlFor="outlined-adornment-password">
@@ -90,6 +123,10 @@ const LoginPage = () => {
           <OutlinedInput
             id="outlined-adornment-password"
             type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setPassword(e.target.value)
+            }
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -106,7 +143,13 @@ const LoginPage = () => {
             label="Password"
             placeholder="Enter Password"
           />
-          <FormHelperText error={errorCode !== 0}>{errorCode === 1 ? "Please enter both email and password" : errorCode === 2 ? "Email or password is incorrect" : ""}</FormHelperText>
+          <FormHelperText error={errorCode !== 0}>
+            {errorCode === 1
+              ? "Please enter both email and password"
+              : errorCode === 2
+                ? errorMessage || "Email or password is incorrect"
+                : ""}
+          </FormHelperText>
         </FormControl>
         <Button
           variant="contained"
@@ -114,8 +157,9 @@ const LoginPage = () => {
           sx={{ mt: 2, fontWeight: 700 }}
           type="submit"
           size="large"
+          disabled={loading}
         >
-          Login
+          {loading ? <CircularProgress size={24} color="inherit" /> : "Login"}
         </Button>
       </form>
     </Box>

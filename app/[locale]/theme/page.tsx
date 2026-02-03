@@ -11,7 +11,7 @@ import {
   Chip,
   Divider,
 } from '@mui/material';
-import { theme, darkTheme } from './theme';
+import { theme, darkTheme } from '../../theme/theme';
 
 interface ColorCardProps {
   label: string;
