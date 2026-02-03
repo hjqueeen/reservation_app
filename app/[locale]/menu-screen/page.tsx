@@ -1,12 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { getMockCategories, getMockMenuItems } from "../_data/mockMenuData";
-import MenuItemCard from "../_components/ui/MenuItemCard";
-import CategoryButton from "../_components/ui/CategoryButton";
-import CategorySectionHeader from "../_components/ui/CategorySectionHeader";
-import { useCartStore } from "../_store/useCartStore";
-import { MenuItem } from "../_types/menu";
 
 import {
   Grid,
@@ -18,6 +12,12 @@ import {
   Typography,
 } from "@mui/material";
 import Receipt from "@mui/icons-material/Receipt";
+import { getMockCategories, getMockMenuItems } from "@/app/_data/mockMenuData";
+import { MenuItem } from "@/app/_types/menu";
+import CategorySectionHeader from "@/app/_components/ui/CategorySectionHeader";
+import MenuItemCard from "@/app/_components/ui/MenuItemCard";
+import CategoryButton from "@/app/_components/ui/CategoryButton";
+import { CartState, useCartStore } from "@/app/_store/useCartStore";
 
 const MenuScreen = () => {
   var categories = getMockCategories("1").sort(
@@ -38,7 +38,7 @@ const MenuScreen = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [scrolling, setScrolling] = useState(false);
 
-  const cartItemAmount = useCartStore((state) => state.getCartItemCount());
+  const cartItemAmount = useCartStore((state: CartState) => state.getCartItemCount());
   var selectedTable = 12;
 
   function selectCategory(categoryId: string) {
