@@ -4,6 +4,7 @@ import ClientWrapper from "../_components/ClientWrapper";
 import {
   getMetadataForLocale,
   isValidLocale,
+  locales,
   type Locale,
 } from "../_config/metadata";
 
@@ -11,6 +12,10 @@ type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 };
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
