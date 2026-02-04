@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from "@mui/material";
-import { Home, Info, ContactMail, Palette, Login, Settings, Widgets } from "@mui/icons-material";
+import { Home, Info, Palette, Login, Settings, Widgets } from "@mui/icons-material";
 import { useRouter, usePathname } from "next/navigation";
 import { useLocale } from "../_hooks/useLocale";
 
@@ -15,6 +15,8 @@ const menuItems = [
   { text: "Select Mode", icon: <Settings />, path: "/select-mode" },
   { text: "Menu Screen", icon: <Widgets />, path: "/menu-screen" },
   { text: "Menu Detail", icon: <Widgets />, path: "/menu-detail" },
+  { text: "Home", icon: <Info />, path: "/home" },
+  { text: "Cart", icon: <Info/>,path:"/cart" }
 ];
 
 function pathWithLocale(locale: string, path: string): string {
