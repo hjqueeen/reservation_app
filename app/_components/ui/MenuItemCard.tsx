@@ -69,24 +69,33 @@ export default function MenuItemCard({
         />
       )}
       <CardContent
-        sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}
+        sx={{
+          maxHeight: "50%",
+          p: 1,
+          flexGrow: 1,
+          display: "flex",
+          flexDirection: "column",
+        }}
       >
-        {/* {category && (
-          <Chip
-            label={category}
-            size="small"
-            color="secondary"
-            sx={{ alignSelf: "flex-start", mb: 1 }}
-          />
-        )} */}
-        <Typography variant="h6" component="h3" fontWeight="bold" gutterBottom>
+        <Typography
+          component="h3"
+          fontWeight="bold"
+          gutterBottom
+          sx={{
+            fontSize: { xs: "1rem", sm: "1.25rem" },
+          }}
+        >
           {name}
         </Typography>
         {description && (
           <Typography
-            variant="body2"
             color="text.secondary"
-            sx={{ mb: 2, flexGrow: 1 }}
+            sx={{
+              fontSize: { xs: "0.75rem", sm: "0.875rem" },
+              mb: { xs: 1, sm: 2 },
+              flexGrow: 1,
+              overflow: "hidden",
+            }}
           >
             {description}
           </Typography>
