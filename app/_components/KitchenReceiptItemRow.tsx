@@ -1,5 +1,9 @@
 "use client";
 
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import ListItemButton from "@mui/material/ListItemButton";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import type { OrderItemDto } from "@/app/_types/order";
 
 /** Parse optionsJson (e.g. '["Spicy","No onion"]') to display strings */
@@ -7,7 +11,9 @@ function parseOptionNames(optionsJson?: string): string[] {
   if (!optionsJson?.trim()) return [];
   try {
     const parsed = JSON.parse(optionsJson) as unknown;
-    return Array.isArray(parsed) ? parsed.filter((x): x is string => typeof x === "string") : [];
+    return Array.isArray(parsed)
+      ? parsed.filter((x): x is string => typeof x === "string")
+      : [];
   } catch {
     return [];
   }
@@ -20,7 +26,7 @@ type Props = {
 };
 
 /**
- * Single order item row in kitchen receipt card.
+ * Single order item row in kitchen receipt card (MUI).
  * Shows quantity + name, optional option names; checkable with green highlight when done.
  */
 export default function KitchenReceiptItemRow({
@@ -32,46 +38,50 @@ export default function KitchenReceiptItemRow({
   const displayName = item.name ?? item.menuItemId;
 
   return (
-    <div
-      role="button"
-      tabIndex={0}
+    <ListItemButton
       onClick={() => onCheckedChange?.(!isChecked)}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          onCheckedChange?.(!isChecked);
-        }
+      sx={{
+        borderRadius: 1,
+        py: 1,
+        px: 1.25,
+        bgcolor: isChecked ? "#E8F5E9" : "transparent",
+        "&:hover": {
+          bgcolor: isChecked ? "#C8E6C9" : "action.hover",
+        },
       }}
-      className={`
-        w-full rounded-lg px-2.5 py-2 flex items-center gap-2 cursor-pointer
-        ${isChecked ? "bg-[#E8F5E9] text-[#4CAF50]" : "bg-transparent text-black"}
-      `}
     >
       {isChecked && (
-        <svg
-          className="w-5 h-5 shrink-0 text-[#4CAF50]"
-          fill="currentColor"
-          viewBox="0 0 24 24"
-          aria-hidden
-        >
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-        </svg>
+        <CheckCircleIcon
+          sx={{ color: "#4CAF50", fontSize: 20, mr: 1, flexShrink: 0 }}
+        />
       )}
-      <div className="flex-1 min-w-0 flex flex-col gap-0.5">
-        <span
-          className={`text-base font-medium tracking-wide ${isChecked ? "text-[#4CAF50] line-through" : "text-inherit"}`}
+      <Box sx={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 0.25 }}>
+        <Typography
+          variant="body1"
+          sx={{
+            fontWeight: 500,
+            letterSpacing: 0.8,
+            color: isChecked ? "#4CAF50" : "text.primary",
+            textDecoration: isChecked ? "line-through" : "none",
+          }}
         >
           {item.quantity} {displayName}
-        </span>
+        </Typography>
         {optionNames.map((name) => (
-          <span
+          <Typography
             key={name}
-            className={`text-[13px] pl-2 ${isChecked ? "text-[#4CAF50]/80 line-through" : "text-gray-500"}`}
+            variant="body2"
+            sx={{
+              fontSize: 13,
+              pl: 1,
+              color: isChecked ? "rgba(76, 175, 80, 0.8)" : "text.secondary",
+              textDecoration: isChecked ? "line-through" : "none",
+            }}
           >
             └ {name}
-          </span>
+          </Typography>
         ))}
-      </div>
-    </div>
+      </Box>
+    </ListItemButton>
   );
 }
