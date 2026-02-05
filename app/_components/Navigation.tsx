@@ -16,7 +16,8 @@ const menuItems = [
   { text: "Menu Screen", icon: <Widgets />, path: "/menu-screen" },
   { text: "Menu Detail", icon: <Widgets />, path: "/menu-detail" },
   { text: "Home", icon: <Info />, path: "/home" },
-  { text: "Cart", icon: <Info/>,path:"/cart" }
+  { text: "Cart", icon: <Info/>,path:"/cart" },
+  { text: "Staff Kitchen", icon: <Info/>,path:"/staff-kitchen" }
 ];
 
 function pathWithLocale(locale: string, path: string): string {
