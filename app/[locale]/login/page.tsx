@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useLocale } from "../../_hooks/useLocale";
 import {
   getApiBaseUrl,
@@ -31,6 +31,8 @@ const LoginPage = () => {
     setShowPassword((show: boolean) => !show);
   const router = useRouter();
   const locale = useLocale();
+  const searchParams = useSearchParams();
+  const lang = searchParams.get("lang") ?? (locale === "de" ? "de" : "en");
 
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -86,10 +88,12 @@ const LoginPage = () => {
           textAlign: "center",
         }}
       >
-        Restaurant Login
+        {lang === "de" ? "Login (Deutsch)" : "Login (English)"}
       </Typography>
       <Typography variant="subtitle1" color="text.secondary" sx={{ mb: 6 }}>
-        Enter email and password
+        {lang === "de"
+          ? "E-Mail und Passwort eingeben"
+          : "Enter email and password"}
       </Typography>
 
       <form
