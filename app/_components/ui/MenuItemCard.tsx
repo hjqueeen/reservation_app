@@ -108,7 +108,7 @@ export default function MenuItemCard({
           }}
         >
           <Typography variant="h6" color="primary" fontWeight="bold">
-            ${price.toFixed(2)}
+            {price.toFixed(2)} €
           </Typography>
 
           <Button

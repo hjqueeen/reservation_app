@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from "@mui/material";
-import { Home, Info, Palette, Login, Settings, Widgets } from "@mui/icons-material";
+import { Home, Info, Palette, Login, Settings, Widgets, ShoppingCart } from "@mui/icons-material";
 import { useRouter, usePathname } from "next/navigation";
 import { useLocale } from "../_hooks/useLocale";
 
@@ -16,7 +16,7 @@ const menuItems = [
   { text: "Menu Screen", icon: <Widgets />, path: "/menu-screen" },
   { text: "Menu Detail", icon: <Widgets />, path: "/menu-detail" },
   { text: "Home", icon: <Info />, path: "/home" },
-  { text: "Cart", icon: <Info/>,path:"/cart" },
+  { text: "Cart", icon: <ShoppingCart />, path: "/cart" },
   { text: "Staff Kitchen", icon: <Info/>,path:"/staff-kitchen" }
 ];
 

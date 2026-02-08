@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
+import { useLocale } from "../../_hooks/useLocale";
 
 import {
   Grid,
@@ -24,8 +26,12 @@ import MenuItemCard from "@/app/_components/ui/MenuItemCard";
 import CategoryButton from "@/app/_components/ui/CategoryButton";
 import MenuButton from "@/app/_components/ui/MenuButton";
 import { CartState, useCartStore } from "@/app/_store/useCartStore";
+import MenuDetailDialog from "@/app/_components/ui/MenuDetailDialog";
 
 const MenuScreen = () => {
+  const router = useRouter();
+  const locale = useLocale();
+
   var categories = getMockCategories("1").sort(
     (a, b) => a.displayOrder - b.displayOrder,
   );
@@ -41,6 +47,8 @@ const MenuScreen = () => {
     },
     {} as Record<string, MenuItem[]>,
   );
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [menuItem, setMenuItem] = useState<MenuItem | null>(null);
 
   const [selectedCategory, setSelectedCategory] = useState(categories[0].id);
   const [selectedLanguage, setSelectedLanguage] = useState("de");
@@ -104,7 +112,7 @@ const MenuScreen = () => {
   }, [categories, scrolling]);
 
   function navigateToCart() {
-    // Navigation logic to cart screen
+    router.push(`/${locale}/cart`);
   }
 
   function navigateToOrders() {
@@ -116,7 +124,8 @@ const MenuScreen = () => {
   }
 
   function openDetailMenu(id: string) {
-    // Logic to open detail menu for a specific item
+    setMenuItem(menuItems.find((item) => item.id === id) || null);
+    setDialogOpen(true);
   }
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -312,6 +321,14 @@ const MenuScreen = () => {
           })}
         </Grid>
       </Box>
+
+      {menuItem && (
+        <MenuDetailDialog
+          open={dialogOpen}
+          onClose={() => setDialogOpen(false)}
+          item={menuItem}
+        />
+      )}
     </Box>
   );
 };
